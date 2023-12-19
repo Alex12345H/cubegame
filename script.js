@@ -4,17 +4,15 @@ const goal = document.getElementById('goal');
 const scoreCounter = document.getElementById('scoreCounter');
 const levelCounter = document.getElementById('levelCounter');
 const leaderboardList = document.getElementById('leaderboardList');
-const nameInput = document.getElementById('nameInput');
+const obstacles = document.querySelectorAll('.obstacle');
 
-let level = 1;
 let score = 0;
-let leaderboardData = [];
-
-function getRandomPosition() {
-  const posX = Math.floor(Math.random() * (gameContainer.offsetWidth - 50));
-  const posY = Math.floor(Math.random() * (gameContainer.offsetHeight - 50));
-  return { x: posX, y: posY };
-}
+let level = 1;
+let leaderboardData = [
+  { name: 'Alexander Högg', score: 26643 },
+  { name: 'Gamer Pro', score: 23443 },
+  { name: 'Der Hacker', score: 12329 }
+];
 
 function updateScore() {
   scoreCounter.textContent = `Score: ${score}`;
@@ -35,45 +33,87 @@ function updateLeaderboard() {
   });
 }
 
-function addToLeaderboard() {
-  const playerName = nameInput.value.trim();
-  if (playerName !== '') {
-    leaderboardData.push({ name: playerName, score });
-    nameInput.value = '';
-    updateLeaderboard();
+function obstacleCollision() {
+  alert('Oh nein! Du hast ein Hindernis berührt!');
+  score -= 10;
+  updateScore();
+}
+
+function goalReached() {
+  alert('Hurra! Du hast das Level geschafft!');
+  level++;
+  score += 30;
+  updateLevel();
+  updateScore();
+  setGoalPosition();
+  generateObstacles();
+}
+
+function setGoalPosition() {
+  let goalX, goalY;
+  do {
+    goalX = Math.random() * (gameContainer.offsetWidth - 30);
+    goalY = Math.random() * (gameContainer.offsetHeight - 30);
+    goal.style.left = goalX + 'px';
+    goal.style.top = goalY + 'px';
+  } while (checkCollision(player, goal));
+}
+
+function checkCollision(a, b) {
+  const aRect = a.getBoundingClientRect();
+  const bRect = b.getBoundingClientRect();
+  return !(
+    aRect.bottom < bRect.top ||
+    aRect.top > bRect.bottom ||
+    aRect.right < bRect.left ||
+    aRect.left > bRect.right
+  );
+}
+
+function generateObstacles() {
+  obstacles.forEach(obstacle => obstacle.remove());
+
+  const obstaclesCount = 2 * level;
+  for (let i = 0; i < obstaclesCount; i++) {
+    let obstacleX, obstacleY;
+    do {
+      obstacleX = Math.random() * (gameContainer.offsetWidth - 30);
+      obstacleY = Math.random() * (gameContainer.offsetHeight - 30);
+      obstacle.style.left = obstacleX + 'px';
+      obstacle.style.top = obstacleY + 'px';
+    } while (checkCollision(player, obstacle) || checkCollision(goal, obstacle));
+    const newObstacle = obstacle.cloneNode(true);
+    newObstacle.style.left = obstacleX + 'px';
+    newObstacle.style.top = obstacleY + 'px';
+    gameContainer.appendChild(newObstacle);
   }
 }
 
-function movePlayer(event) {
-  const maxX = gameContainer.offsetWidth - player.offsetWidth;
-  const maxY = gameContainer.offsetHeight - player.offsetHeight;
+gameContainer.addEventListener('mousemove', function(event) {
+  // Hier Bewegungslogik für den Spieler implementieren
+});
 
-  const x = Math.min(Math.max(0, event.clientX - gameContainer.getBoundingClientRect().left), maxX);
-  const y = Math.min(Math.max(0, event.clientY - gameContainer.getBoundingClientRect().top), maxY);
+function obstacleCollisionDetection() {
+  obstacles.forEach(obstacle => {
+    if (checkCollision(player, obstacle)) {
+      obstacleCollision();
+    }
+  });
+}
 
-  player.style.left = x + 'px';
-  player.style.top = y + 'px';
-
-  const playerRect = player.getBoundingClientRect();
-  const goalRect = goal.getBoundingClientRect();
-
-  if (isColliding(playerRect, goalRect)) {
-    score += 10;
-    level++;
-    updateScore();
-    updateLevel();
-    const newPos = getRandomPosition();
-    goal.style.left = newPos.x + 'px';
-    goal.style.top = newPos.y + 'px';
+function goalCollisionDetection() {
+  if (checkCollision(player, goal)) {
+    goalReached();
   }
 }
 
-function isColliding(a, b) {
-  return !(a.bottom < b.top || a.top > b.bottom || a.right < b.left || a.left > b.right);
-}
+setInterval(() => {
+  obstacleCollisionDetection();
+  goalCollisionDetection();
+}, 100);
 
-gameContainer.addEventListener('mousemove', movePlayer);
-
+// Initialisierung des Spiels
 updateScore();
 updateLevel();
-updateLeaderboard();
+setGoalPosition();
+generateObstacles();
