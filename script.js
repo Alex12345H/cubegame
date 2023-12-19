@@ -2,6 +2,7 @@ const player = document.getElementById('player');
 const goal = document.getElementById('goal');
 const gameContainer = document.querySelector('.game-container');
 const scoreCounter = document.getElementById('scoreCounter');
+const levelCounter = document.getElementById('levelCounter');
 
 let level = 1;
 let obstaclesCount = 1;
@@ -31,6 +32,7 @@ gameContainer.addEventListener('mousemove', function(event) {
     alert('Level ' + level);
     setLevel(level, obstaclesCount);
     updateScore();
+    updateLevel();
   }
 
   for (let obstacle of obstacles) {
@@ -91,3 +93,9 @@ function obstacleCollision() {
 function updateScore() {
   scoreCounter.textContent = 'Score: ' + score;
 }
+
+function updateLevel() {
+  levelCounter.textContent = 'Level: ' + level;
+}
+
+setLevel(level, obstaclesCount);
