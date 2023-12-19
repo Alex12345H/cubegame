@@ -2,31 +2,59 @@
 
 .game-container {
   position: relative;
+  width: 600px;
+  height: 400px;
+  border: 2px solid #333;
+  perspective: 800px;
 }
 
 .player {
   position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #3498db; /* Blauer runder Spieler */
+  border-radius: 50%;
 }
 
-.player-name {
+.goal {
   position: absolute;
-  top: -20px; /* Position über dem Spieler */
-  left: 0;
-  font-size: 12px;
-}
-
-.player-score {
-  position: absolute;
-  top: -40px; /* Position über dem Spieler */
-  left: 0;
-  font-size: 12px;
+  width: 15px;
+  height: 15px;
+  background-color: #2ecc71; /* Grünes rundes Ziel */
+  border-radius: 50%;
 }
 
 .obstacle {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: #e74c3c;
+  background-color: #e74c3c; /* Rotes viereckiges Hindernis */
 }
-/* Weitere Styles hier */
 
+.score-counter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.level-counter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.leaderboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+  padding: 10px;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+}
