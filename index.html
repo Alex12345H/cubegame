@@ -8,19 +8,21 @@
 <body>
 
   <div class="game-container">
-    <div class="player" id="player"></div>
+    <div class="player" id="player">
+      <span class="player-name" id="playerName"></span>
+      <span class="player-score" id="playerScore"></span>
+    </div>
     <div class="goal" id="goal"></div>
-    <!-- Hindernisse werden dynamisch eingefügt -->
+    <div class="obstacle" id="obstacle"></div>
   </div>
 
   <div class="score-counter" id="scoreCounter">Score: 0</div>
-  <div class="level-counter" id="levelCounter">Level: 1</div>
 
   <div class="leaderboard" id="leaderboard">
     <h2>Bestenliste</h2>
-    <ul id="leaderboardList">
+    <ol id="leaderboardList">
       <!-- Platzierungen hier -->
-    </ul>
+    </ol>
     <div class="leaderboard-header">
       <span class="leaderboard-name">Name</span>
       <span class="leaderboard-score">Score</span>
