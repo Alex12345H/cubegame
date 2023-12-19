@@ -1,9 +1,11 @@
 const player = document.getElementById('player');
 const goal = document.getElementById('goal');
 const gameContainer = document.querySelector('.game-container');
+const scoreCounter = document.getElementById('scoreCounter');
 
 let level = 1;
 let obstaclesCount = 1;
+let score = 0;
 
 gameContainer.addEventListener('mousemove', function(event) {
   const x = event.clientX - gameContainer.getBoundingClientRect().left - player.offsetWidth / 2;
@@ -25,13 +27,16 @@ gameContainer.addEventListener('mousemove', function(event) {
   if (isColliding(playerRect, goalRect)) {
     level++;
     obstaclesCount++;
+    score += 30;
     alert('Level ' + level);
     setLevel(level, obstaclesCount);
+    updateScore();
   }
 
   for (let obstacle of obstacles) {
     const obstacleRect = obstacle.getBoundingClientRect();
     if (isColliding(playerRect, obstacleRect)) {
+      obstacleCollision();
       alert('Du hast das Hindernis berührt! Versuche es erneut.');
       setLevel(level, obstaclesCount);
       break;
@@ -78,4 +83,11 @@ function createObstacle() {
   gameContainer.appendChild(obstacle);
 }
 
-setLevel(level, obstaclesCount);
+function obstacleCollision() {
+  score -= 10;
+  updateScore();
+}
+
+function updateScore() {
+  scoreCounter.textContent = 'Score: ' + score;
+}
