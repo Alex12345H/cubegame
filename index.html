@@ -8,34 +8,21 @@
 <body>
 
   <div class="game-container">
-    <div class="player" id="player">
-      <span class="player-name" id="playerName"></span>
-      <span class="player-score" id="playerScore"></span>
-    </div>
+    <div class="player" id="player"></div>
     <div class="goal" id="goal"></div>
-    <div class="obstacle" id="obstacle"></div>
+    <!-- Weitere Elemente für Hindernisse usw. -->
   </div>
 
   <div class="score-counter" id="scoreCounter">Score: 0</div>
-
+  <div class="level-counter" id="levelCounter">Level: 1</div>
   <div class="leaderboard" id="leaderboard">
-    <h2>Bestenliste</h2>
-    <ol id="leaderboardList">
-      <!-- Platzierungen hier -->
-    </ol>
-    <div class="leaderboard-header">
-      <span class="leaderboard-name">Name</span>
-      <span class="leaderboard-score">Score</span>
-    </div>
-    <input type="text" id="nameInput" placeholder="Name eingeben">
-    <button onclick="addToLeaderboard()">Score eintragen</button>
+    <!-- Leaderboard-Inhalt hier -->
   </div>
 
   <div class="copyright">
-    <p>(c)Alex12345H - <a href="https://github.com/Alex12345H/cubegame">Besuche hier</a></p>
+    <p>(c)Alex12345H - <a href="https://github.com/Alex12345H/cubegame">Hier klicken</a></p>
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
