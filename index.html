@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!D<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -8,15 +8,17 @@
 <body>
 
   <div class="game-container">
-    <div class="player" id="player"></div>
-    <div class="goal" id="goal"></div>
-    <!-- Weitere Elemente für Hindernisse usw. -->
+    <div class="player"></div>
+    <div class="goal"></div>
+    <!-- Hindernisse werden dynamisch hinzugefügt -->
   </div>
 
-  <div class="score-counter" id="scoreCounter">Score: 0</div>
-  <div class="level-counter" id="levelCounter">Level: 1</div>
-  <div class="leaderboard" id="leaderboard">
-    <!-- Leaderboard-Inhalt hier -->
+  <div class="scoreboard">
+    <div class="score-counter" id="scoreCounter">Score: 0</div>
+    <div class="level-counter" id="levelCounter">Level: 1</div>
+    <ol class="leaderboard" id="leaderboardList">
+      <!-- Leaderboard-Einträge hier -->
+    </ol>
   </div>
 
   <div class="copyright">
