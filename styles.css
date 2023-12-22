@@ -1,66 +1,16 @@
-/* Stil für das Spiel und das Scoreboard */
+/* CSS für das Spielstyling */
+/* Hier können verschiedene Stile für die Blöcke, den Spielbereich usw. definiert werden */
 
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-}
-
-.game-container {
-  position: relative;
-  width: 600px;
+#gameArea {
+  width: 400px;
   height: 400px;
-  border: 2px solid #333;
-  perspective: 800px;
+  border: 1px solid #000;
+  position: relative;
 }
 
-.player {
+.block {
+  width: 40px;
+  height: 40px;
+  background-color: red;
   position: absolute;
-  width: 30px;
-  height: 30px;
-  background-color: #3498db; /* Blauer runder Spieler */
-  border-radius: 50%;
 }
-
-.goal {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  background-color: #2ecc71; /* Grünes rundes Ziel */
-  border-radius: 50%;
-}
-
-.obstacle {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background-color: #e74c3c; /* Rotes viereckiges Hindernis */
-}
-
-.scoreboard {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: #fff;
-}
-
-.score-counter, .level-counter {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.leaderboard {
-  list-style: none;
-  padding: 0;
-}
-
-.leaderboard li {
-  margin-bottom: 5px;
-}
-
-/* Weitere Styles hier einfügen */
